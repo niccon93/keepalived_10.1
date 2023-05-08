@@ -87,7 +87,7 @@ vrrp_instance VI_1 {
     }
 
     unicast_peer {
-    10.128.0.34
+    10.128.0.10
     }
 
     virtual_ipaddress {
@@ -112,7 +112,7 @@ auth_pass password
 }
 
 unicast_peer {
-10.128.0.10
+10.128.0.34
 }
 
 virtual_ipaddress {
@@ -121,9 +121,9 @@ virtual_ipaddress {
 
 }
 ```
-![img](img/1.1.PNG)
+![img](img/1.2.PNG)
 ![img](img/2.PNG)
-![img](img/3.1.PNG)
+![img](img/3.2.PNG)
 ![img](img/4.PNG)
 
 
