@@ -74,39 +74,40 @@ ip a show eth0
 ```
 Файл keepalived.conf для ноды MASTER
 ```
-vrrp_instance test {
-state MASTER
-interface eth0
-virtual_router_id 10
-priority 110
-advert_int 4
+vrrp_instance VI_1 {
+    state MASTER
+    interface eth0
+    virtual_router_id 51
+    priority 110
+    advert_int 4
 
-authentication {
-auth_type AH
-auth_pass password
+    authentication {
+    auth_type PASS
+    auth_pass password
+    }
+
+    unicast_peer {
+    10.128.0.34
+    }
+
+    virtual_ipaddress {
+    10.128.0.200 dev eth0 label eth0:vip
+    }
+
 }
 
-unicast_peer {
-10.128.0.34
-}
-
-virtual_ipaddress {
-10.128.0.200 dev eth0 label eth0:vip
-}
-
-}
 ```
 Файл keepalived.conf для ноды BACKUP
 ```
-vrrp_instance test {
+vrrp_instance VI_2 {
 state BACKUP
-interface enp138s0
-virtual_router_id 10
-priority 110
+interface eth0
+virtual_router_id 51
+priority 100
 advert_int 4
 
 authentication {
-auth_type AH
+auth_type PASS
 auth_pass password
 }
 
