@@ -61,6 +61,69 @@ virtual_ipaddress {
 *В качестве решения предоставьте:*   
 *- рабочую конфигурацию обеих нод, оформленную как блок кода в вашем md-файле;*   
 *- скриншоты статуса сервисов, на которых видно, что одна нода перешла в MASTER, а вторая в BACKUP state.*   
+```
+udo apt update
+sudo apt install iptables-persistent keepalived
+sudo iptables -I INPUT -p vrrp -d 224.0.0.18 -j ACCEPT
+sudo netfilter-persistent save
+sudo nano /etc/keepalived/keepalived.conf  # Содержимое файла keepalived.conf для нод master и backup ниже в блоке
+sudo systemctl start keepalived
+sudo systemctl enable keepalived
+sudo systemctl status keepalived
+ip add
+```
+Файл keepalived.conf для ноды MASTER
+```
+vrrp_instance test {
+state MASTER
+interface eth0
+virtual_router_id 10
+priority 110
+advert_int 4
+
+authentication {
+auth_type AH
+auth_pass password
+}
+
+unicast_peer {
+10.128.0.34
+}
+
+virtual_ipaddress {
+10.128.0.200 dev eth0 label eth0:vip
+}
+
+}
+```
+Файл keepalived.conf для ноды BACKUP
+```
+vrrp_instance test {
+state BACKUP
+interface enp138s0
+virtual_router_id 10
+priority 110
+advert_int 4
+
+authentication {
+auth_type AH
+auth_pass password
+}
+
+unicast_peer {
+10.128.0.10
+}
+
+virtual_ipaddress {
+10.128.0.200 dev eth0 label eth0:vip
+}
+
+}
+```
+![img](img/1.PNG)
+![img](img/2.PNG)
+![img](img/3.PNG)
+![img](img/4.PNG)
 
 ## Дополнительные задания со звёздочкой*
 
