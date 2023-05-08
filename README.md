@@ -70,7 +70,7 @@ sudo nano /etc/keepalived/keepalived.conf  # Содержимое файла kee
 sudo systemctl start keepalived
 sudo systemctl enable keepalived
 sudo systemctl status keepalived
-ip add
+ip a show eth0
 ```
 Файл keepalived.conf для ноды MASTER
 ```
