@@ -121,9 +121,9 @@ virtual_ipaddress {
 
 }
 ```
-![img](img/1.PNG)
+![img](img/1.1.PNG)
 ![img](img/2.PNG)
-![img](img/3.PNG)
+![img](img/3.1.PNG)
 ![img](img/4.PNG)
 
 ## Дополнительные задания со звёздочкой*
